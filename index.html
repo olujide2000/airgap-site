@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Airgap Transcribe — transcription that never leaves your computer</title>
+<meta name="description" content="Transcribe interviews, depositions and sessions entirely on your own Windows PC. No upload, no account, no cloud. For lawyers, journalists, clinicians and researchers who cannot send recordings to a third party.">
+<style>
+/* Airgap Transcribe - demand test site
+   No frameworks, no trackers, no external requests. Loads instantly anywhere. */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --border: #e3e0da;
+  --ink: #1c1a17;
+  --ink-soft: #55504a;
+  --ink-faint: #86807a;
+  --accent: #1f5f4b;
+  --accent-soft: #eaf2ef;
+  --warn-bg: #fdf6e6;
+  --warn-border: #e8d9b0;
+  --max: 44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1b1e23;
+    --border: #2e333a;
+    --ink: #eceae7;
+    --ink-soft: #b3aea7;
+    --ink-faint: #857f78;
+    --accent: #5fc0a0;
+    --accent-soft: #16241f;
+    --warn-bg: #241f14;
+    --warn-border: #4a3f26;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+  margin-bottom: 3rem;
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.logo {
+  font-weight: 650; letter-spacing: -0.01em; color: var(--ink);
+  text-decoration: none; font-size: 1.05rem;
+}
+.logo span { color: var(--accent); }
+header.site nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-left: 1.1rem;
+}
+header.site nav a:hover { color: var(--accent); }
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+  font-weight: 680;
+}
+h2 {
+  font-size: 1.3rem; letter-spacing: -0.015em; margin: 2.8rem 0 0.9rem; font-weight: 640;
+}
+h3 { font-size: 1.02rem; margin: 1.8rem 0 0.5rem; font-weight: 640; }
+
+.lede { font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 2rem; }
+
+p { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+strong { font-weight: 640; }
+
+/* the one idea the page has to land */
+.claim {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.claim p { margin: 0; font-size: 1.05rem; }
+
+ul.plain { padding-left: 1.15rem; margin: 0 0 1.4rem; }
+ul.plain li { margin-bottom: 0.55rem; }
+
+.who { display: grid; gap: 0.85rem; margin: 1.5rem 0 2rem; }
+.who div {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 8px; padding: 0.9rem 1.1rem;
+}
+.who b { display: block; margin-bottom: 0.15rem; }
+.who span { color: var(--ink-soft); font-size: 0.94rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0 2rem; font-size: 0.94rem; }
+th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+th { font-weight: 640; color: var(--ink-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td:first-child { font-weight: 560; }
+.tablescroll { overflow-x: auto; }
+
+/* signup */
+.signup {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 10px; padding: 1.6rem; margin: 2.5rem 0;
+}
+.signup h2 { margin-top: 0; }
+.signup form { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.signup input[type=email] {
+  flex: 1 1 15rem; padding: 0.72rem 0.85rem; font-size: 1rem;
+  border: 1px solid var(--border); border-radius: 7px;
+  background: var(--bg); color: var(--ink);
+}
+.signup input[type=email]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.signup button {
+  padding: 0.72rem 1.3rem; font-size: 1rem; font-weight: 600;
+  background: var(--accent); color: #fff; border: 0; border-radius: 7px; cursor: pointer;
+}
+.signup button:hover { filter: brightness(1.08); }
+.signup .note { font-size: 0.86rem; color: var(--ink-faint); margin: 0.9rem 0 0; }
+
+.status {
+  background: var(--warn-bg); border: 1px solid var(--warn-border);
+  border-radius: 8px; padding: 0.85rem 1.1rem; margin: 0 0 2rem;
+  font-size: 0.93rem; color: var(--ink-soft);
+}
+
+footer.site {
+  margin-top: 4rem; border-top: 1px solid var(--border);
+  padding: 1.5rem 0 3rem; font-size: 0.88rem; color: var(--ink-faint);
+}
+footer.site a { color: var(--ink-soft); }
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="./">Airgap<span>.</span></a>
+    <nav>
+      <a href="transcribe-without-uploading.html">Offline</a>
+      <a href="hipaa-gdpr-compliant-transcription.html">Compliance</a>
+      <a href="macwhisper-for-windows.html">For Windows</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Transcription that never leaves your computer.</h1>
+
+  <p class="lede">
+    Airgap turns your recordings into text on your own Windows PC. The audio is never
+    uploaded, never stored on someone else's server, and never seen by anyone but you.
+    Unplug the network cable and it still works.
+  </p>
+
+  <div class="status">
+    <strong>In development.</strong> The transcription engine is built and benchmarked;
+    the app around it is being finished now. Leave your email below and I'll tell you when
+    it's ready — and ask what you need it to do.
+  </div>
+
+  <div class="claim">
+    <p>
+      Every cloud transcription service — Rev, Otter, Descript, Sonix — works by
+      <strong>uploading your recording to their servers</strong>. For a lot of professional
+      work, that single step is the problem. Airgap removes it.
+    </p>
+  </div>
+
+  <h2>Who this is for</h2>
+
+  <div class="who">
+    <div>
+      <b>Lawyers and paralegals</b>
+      <span>Client interviews, depositions, hearing recordings. Uploading privileged
+      material to a third-party service can itself be the breach.</span>
+    </div>
+    <div>
+      <b>Journalists</b>
+      <span>Source protection. A cloud provider is a third party that can be subpoenaed,
+      breached, or served a warrant you never hear about.</span>
+    </div>
+    <div>
+      <b>Therapists and clinicians</b>
+      <span>Session recordings and dictation are special-category data under HIPAA and
+      GDPR. Most cloud tools need a signed agreement you may not have.</span>
+    </div>
+    <div>
+      <b>Academic researchers</b>
+      <span>Ethics approval commonly forbids processing interview data on third-party
+      services. Local processing sidesteps the whole question.</span>
+    </div>
+    <div>
+      <b>Podcasters and agencies</b>
+      <span>Fifty files at once with no per-minute bill and no upload wait.</span>
+    </div>
+  </div>
+
+  <h2>What it does</h2>
+
+  <ul class="plain">
+    <li><strong>Drop in files or whole folders.</strong> Queue them up and walk away —
+      it works through them and can run overnight.</li>
+    <li><strong>Exports the formats professionals actually file:</strong> Word (.docx),
+      plain text, CSV, plus SRT and VTT subtitles.</li>
+    <li><strong>Click any line to jump to that moment</strong> in the audio, and correct
+      it inline. Find-and-replace across the whole transcript.</li>
+    <li><strong>Runs completely offline</strong> once installed. No account, no sign-in,
+      no telemetry, no licence server phoning home.</li>
+    <li><strong>Speaker labels</strong> — who said what — and custom vocabulary for names
+      and technical terms.</li>
+  </ul>
+
+  <h2>Speed, measured — not estimated</h2>
+
+  <p>
+    Benchmarked on an ordinary laptop (AMD Ryzen 7, no dedicated AI hardware, no NVIDIA
+    graphics card), transcribing a real one-hour recording:
+  </p>
+
+  <div class="tablescroll">
+  <table>
+    <thead>
+      <tr><th>Mode</th><th>One hour of audio takes</th><th>Best for</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Fast</td><td>about 9 minutes</td><td>Clear audio, quick turnaround</td></tr>
+      <tr><td>Accurate</td><td>about 24 minutes</td><td>Difficult audio, accents, final transcripts</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p style="color:var(--ink-faint); font-size:0.9rem;">
+    Faster machines finish sooner. These are real timings from a mid-range 2021 laptop,
+    not a marketing figure — and unlike cloud services, there is no upload time on top.
+  </p>
+
+  <div class="signup" id="notify">
+    <h2>Tell me when it's ready</h2>
+    <p>
+      No newsletter, no marketing list. One email when it ships, and possibly one asking
+      what you'd need it to do. That's it.
+    </p>
+
+    <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required
+             aria-label="Your email address">
+      <input type="hidden" name="_subject" value="Airgap — notify me">
+      <button type="submit">Notify me</button>
+    </form>
+
+    <p class="note">
+      Your address is used for this one announcement and nothing else. It isn't sold,
+      shared, or added to any other list.
+    </p>
+  </div>
+
+  <h2>Why one-time, not a subscription</h2>
+
+  <p>
+    Airgap will be a <strong>one-off purchase</strong>, not a monthly fee. It runs entirely
+    on your machine, so there are no servers to pay for — which means there's no honest
+    reason to charge you every month for software already sitting on your hard drive.
+  </p>
+
+  <p>
+    It also means the app has no reason to check in with anyone. A privacy tool that phones
+    home to validate a subscription isn't really a privacy tool.
+  </p>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>
+      Airgap Transcribe — in development, 2026.
+      Built by an independent developer, not a company.
+    </p>
+    <p>
+      <a href="transcribe-without-uploading.html">Transcribe without uploading</a> ·
+      <a href="hipaa-gdpr-compliant-transcription.html">HIPAA &amp; GDPR</a> ·
+      <a href="macwhisper-for-windows.html">A MacWhisper alternative for Windows</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

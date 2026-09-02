@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to transcribe an interview without uploading it anywhere</title>
+<meta name="description" content="If you cannot send a recording to a third-party service, you need local transcription. Here is what that means, what it costs in speed, and the options available on Windows in 2026.">
+<style>
+/* Airgap Transcribe - demand test site
+   No frameworks, no trackers, no external requests. Loads instantly anywhere. */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --border: #e3e0da;
+  --ink: #1c1a17;
+  --ink-soft: #55504a;
+  --ink-faint: #86807a;
+  --accent: #1f5f4b;
+  --accent-soft: #eaf2ef;
+  --warn-bg: #fdf6e6;
+  --warn-border: #e8d9b0;
+  --max: 44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1b1e23;
+    --border: #2e333a;
+    --ink: #eceae7;
+    --ink-soft: #b3aea7;
+    --ink-faint: #857f78;
+    --accent: #5fc0a0;
+    --accent-soft: #16241f;
+    --warn-bg: #241f14;
+    --warn-border: #4a3f26;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+  margin-bottom: 3rem;
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.logo {
+  font-weight: 650; letter-spacing: -0.01em; color: var(--ink);
+  text-decoration: none; font-size: 1.05rem;
+}
+.logo span { color: var(--accent); }
+header.site nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-left: 1.1rem;
+}
+header.site nav a:hover { color: var(--accent); }
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+  font-weight: 680;
+}
+h2 {
+  font-size: 1.3rem; letter-spacing: -0.015em; margin: 2.8rem 0 0.9rem; font-weight: 640;
+}
+h3 { font-size: 1.02rem; margin: 1.8rem 0 0.5rem; font-weight: 640; }
+
+.lede { font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 2rem; }
+
+p { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+strong { font-weight: 640; }
+
+/* the one idea the page has to land */
+.claim {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.claim p { margin: 0; font-size: 1.05rem; }
+
+ul.plain { padding-left: 1.15rem; margin: 0 0 1.4rem; }
+ul.plain li { margin-bottom: 0.55rem; }
+
+.who { display: grid; gap: 0.85rem; margin: 1.5rem 0 2rem; }
+.who div {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 8px; padding: 0.9rem 1.1rem;
+}
+.who b { display: block; margin-bottom: 0.15rem; }
+.who span { color: var(--ink-soft); font-size: 0.94rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0 2rem; font-size: 0.94rem; }
+th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+th { font-weight: 640; color: var(--ink-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td:first-child { font-weight: 560; }
+.tablescroll { overflow-x: auto; }
+
+/* signup */
+.signup {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 10px; padding: 1.6rem; margin: 2.5rem 0;
+}
+.signup h2 { margin-top: 0; }
+.signup form { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.signup input[type=email] {
+  flex: 1 1 15rem; padding: 0.72rem 0.85rem; font-size: 1rem;
+  border: 1px solid var(--border); border-radius: 7px;
+  background: var(--bg); color: var(--ink);
+}
+.signup input[type=email]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.signup button {
+  padding: 0.72rem 1.3rem; font-size: 1rem; font-weight: 600;
+  background: var(--accent); color: #fff; border: 0; border-radius: 7px; cursor: pointer;
+}
+.signup button:hover { filter: brightness(1.08); }
+.signup .note { font-size: 0.86rem; color: var(--ink-faint); margin: 0.9rem 0 0; }
+
+.status {
+  background: var(--warn-bg); border: 1px solid var(--warn-border);
+  border-radius: 8px; padding: 0.85rem 1.1rem; margin: 0 0 2rem;
+  font-size: 0.93rem; color: var(--ink-soft);
+}
+
+footer.site {
+  margin-top: 4rem; border-top: 1px solid var(--border);
+  padding: 1.5rem 0 3rem; font-size: 0.88rem; color: var(--ink-faint);
+}
+footer.site a { color: var(--ink-soft); }
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="./">Airgap<span>.</span></a>
+    <nav>
+      <a href="hipaa-gdpr-compliant-transcription.html">Compliance</a>
+      <a href="macwhisper-for-windows.html">For Windows</a>
+      <a href="./">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Transcribing without uploading</h1>
+
+  <p class="lede">
+    Most transcription tools work by sending your file to a server. If that's not an option
+    for your work, here's what the alternative actually involves — the honest version,
+    including the trade-offs.
+  </p>
+
+  <h2>What "uploading" really means</h2>
+
+  <p>
+    When you drop a recording into a cloud transcription service, several things happen that
+    are easy to overlook:
+  </p>
+
+  <ul class="plain">
+    <li>A copy of your recording now exists on infrastructure you don't control.</li>
+    <li>It may be retained after processing — sometimes for months, per the terms of service.</li>
+    <li>It may be accessible to that company's staff, contractors, or sub-processors.</li>
+    <li>It can be compelled by legal process served on <em>them</em>, which you may never
+      be told about.</li>
+    <li>It becomes part of their breach surface as well as yours.</li>
+  </ul>
+
+  <p>
+    For a marketing podcast, none of that matters. For a privileged client conversation, a
+    patient session, or an interview with a source who asked for protection, every line of
+    it matters.
+  </p>
+
+  <h2>How local transcription works instead</h2>
+
+  <p>
+    The speech recognition models that power modern transcription — OpenAI's Whisper family
+    chief among them — are <strong>open, and they run on ordinary computers</strong>. You
+    don't need a data centre. You need the model file on your hard drive and software to
+    feed audio through it.
+  </p>
+
+  <p>
+    The recording is read from your disk, processed by your own processor, and written back
+    out as text. No network connection is involved at any point. You can verify this the
+    blunt way: disconnect from the internet and watch it work anyway.
+  </p>
+
+  <h2>The honest trade-off: it's slower</h2>
+
+  <p>
+    This is the part most pages like this leave out. Cloud services run on hardware far
+    beyond anything in a laptop. Local transcription is slower, and you should know by how
+    much before you commit.
+  </p>
+
+  <p>
+    Measured on a mid-range 2021 laptop with no dedicated AI hardware, transcribing a real
+    one-hour recording:
+  </p>
+
+  <div class="tablescroll">
+  <table>
+    <thead>
+      <tr><th>Mode</th><th>One hour of audio</th><th>Trade-off</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Fast</td><td>about 9 minutes</td><td>Very good on clear audio; struggles more with heavy accents and crosstalk</td></tr>
+      <tr><td>Accurate</td><td>about 24 minutes</td><td>Noticeably better on difficult audio; worth it for final transcripts</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>
+    Two things soften that. First, there's <strong>no upload time</strong> — a one-hour
+    recording is often several hundred megabytes, and on a typical connection you'd spend a
+    meaningful chunk of that 9 minutes just sending it. Second, it's unattended: you queue
+    files and walk away, or leave a batch running overnight.
+  </p>
+
+  <div class="claim">
+    <p>
+      The real comparison isn't "9 minutes versus instant." It's "9 minutes on my own
+      machine versus upload time, queue time, processing, and a permanent copy of a
+      confidential recording on someone else's server."
+    </p>
+  </div>
+
+  <h2>What you need</h2>
+
+  <ul class="plain">
+    <li><strong>A reasonably modern computer.</strong> Any machine from roughly 2018 onward
+      handles this. A dedicated graphics card helps but isn't required.</li>
+    <li><strong>Disk space for the model</strong> — a few hundred megabytes to about 1.6GB
+      depending on the accuracy level. Downloaded once, then yours.</li>
+    <li><strong>Software that doesn't make you build it yourself.</strong> The models are
+      free; the awkward part is the tooling around them.</li>
+  </ul>
+
+  <p>
+    That last point is the real barrier. The underlying technology is free and open. Making
+    it something a lawyer or clinician can install and use without touching a command line
+    is the actual work — see <a href="macwhisper-for-windows.html">the Windows options</a>
+    for an honest comparison of what exists.
+  </p>
+
+  <div class="signup" id="notify">
+    <h2>Tell me when it's ready</h2>
+    <p>
+      Airgap is being built for exactly this: offline transcription for people who can't
+      upload. One email when it ships.
+    </p>
+    <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required
+             aria-label="Your email address">
+      <input type="hidden" name="_subject" value="Airgap — notify me (offline page)">
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="note">Used for this one announcement and nothing else.</p>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Airgap Transcribe — in development, 2026.</p>
+    <p><a href="./">Home</a> · <a href="hipaa-gdpr-compliant-transcription.html">HIPAA &amp; GDPR</a> · <a href="macwhisper-for-windows.html">A MacWhisper alternative for Windows</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

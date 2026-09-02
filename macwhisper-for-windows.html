@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MacWhisper for Windows: why it doesn't exist, and what to use instead</title>
+<meta name="description" content="MacWhisper is Mac-only and cannot be ported to Windows. Here is why, an honest look at the Windows alternatives in 2026, and which one fits your job.">
+<style>
+/* Airgap Transcribe - demand test site
+   No frameworks, no trackers, no external requests. Loads instantly anywhere. */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --border: #e3e0da;
+  --ink: #1c1a17;
+  --ink-soft: #55504a;
+  --ink-faint: #86807a;
+  --accent: #1f5f4b;
+  --accent-soft: #eaf2ef;
+  --warn-bg: #fdf6e6;
+  --warn-border: #e8d9b0;
+  --max: 44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1b1e23;
+    --border: #2e333a;
+    --ink: #eceae7;
+    --ink-soft: #b3aea7;
+    --ink-faint: #857f78;
+    --accent: #5fc0a0;
+    --accent-soft: #16241f;
+    --warn-bg: #241f14;
+    --warn-border: #4a3f26;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+  margin-bottom: 3rem;
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.logo {
+  font-weight: 650; letter-spacing: -0.01em; color: var(--ink);
+  text-decoration: none; font-size: 1.05rem;
+}
+.logo span { color: var(--accent); }
+header.site nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-left: 1.1rem;
+}
+header.site nav a:hover { color: var(--accent); }
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+  font-weight: 680;
+}
+h2 {
+  font-size: 1.3rem; letter-spacing: -0.015em; margin: 2.8rem 0 0.9rem; font-weight: 640;
+}
+h3 { font-size: 1.02rem; margin: 1.8rem 0 0.5rem; font-weight: 640; }
+
+.lede { font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 2rem; }
+
+p { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+strong { font-weight: 640; }
+
+/* the one idea the page has to land */
+.claim {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.claim p { margin: 0; font-size: 1.05rem; }
+
+ul.plain { padding-left: 1.15rem; margin: 0 0 1.4rem; }
+ul.plain li { margin-bottom: 0.55rem; }
+
+.who { display: grid; gap: 0.85rem; margin: 1.5rem 0 2rem; }
+.who div {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 8px; padding: 0.9rem 1.1rem;
+}
+.who b { display: block; margin-bottom: 0.15rem; }
+.who span { color: var(--ink-soft); font-size: 0.94rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0 2rem; font-size: 0.94rem; }
+th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+th { font-weight: 640; color: var(--ink-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td:first-child { font-weight: 560; }
+.tablescroll { overflow-x: auto; }
+
+/* signup */
+.signup {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 10px; padding: 1.6rem; margin: 2.5rem 0;
+}
+.signup h2 { margin-top: 0; }
+.signup form { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.signup input[type=email] {
+  flex: 1 1 15rem; padding: 0.72rem 0.85rem; font-size: 1rem;
+  border: 1px solid var(--border); border-radius: 7px;
+  background: var(--bg); color: var(--ink);
+}
+.signup input[type=email]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.signup button {
+  padding: 0.72rem 1.3rem; font-size: 1rem; font-weight: 600;
+  background: var(--accent); color: #fff; border: 0; border-radius: 7px; cursor: pointer;
+}
+.signup button:hover { filter: brightness(1.08); }
+.signup .note { font-size: 0.86rem; color: var(--ink-faint); margin: 0.9rem 0 0; }
+
+.status {
+  background: var(--warn-bg); border: 1px solid var(--warn-border);
+  border-radius: 8px; padding: 0.85rem 1.1rem; margin: 0 0 2rem;
+  font-size: 0.93rem; color: var(--ink-soft);
+}
+
+footer.site {
+  margin-top: 4rem; border-top: 1px solid var(--border);
+  padding: 1.5rem 0 3rem; font-size: 0.88rem; color: var(--ink-faint);
+}
+footer.site a { color: var(--ink-soft); }
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="./">Airgap<span>.</span></a>
+    <nav>
+      <a href="transcribe-without-uploading.html">Offline</a>
+      <a href="hipaa-gdpr-compliant-transcription.html">Compliance</a>
+      <a href="./">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>MacWhisper for Windows</h1>
+
+  <p class="lede">
+    Short answer: it doesn't exist, and it isn't coming. Here's the actual reason, and an
+    honest look at what Windows users can use instead — including options that aren't mine.
+  </p>
+
+  <h2>Why there's no Windows version</h2>
+
+  <p>
+    MacWhisper is a genuinely good app from an independent Mac developer. It runs OpenAI's
+    Whisper model locally so your audio never leaves your machine, and it sells for a
+    one-time fee rather than a subscription. It has passed 300,000 downloads.
+  </p>
+
+  <p>
+    But it's built on parts of macOS that have no Windows equivalent — Apple Silicon
+    acceleration for the local models, and more recently Apple's own on-device speech
+    engine. Those aren't features that can be flagged on for Windows; they're the
+    foundation the app is built on. A Windows version wouldn't be a port. It would be a
+    rewrite.
+  </p>
+
+  <p>
+    That's why searching for "MacWhisper for Windows" turns up nothing official, and
+    probably always will.
+  </p>
+
+  <h2>What Windows users actually have</h2>
+
+  <p>
+    A fair summary of the landscape in 2026, including the free options:
+  </p>
+
+  <div class="tablescroll">
+  <table>
+    <thead>
+      <tr><th>Tool</th><th>Cost</th><th>What it's really for</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Subtitle Edit</td><td>Free, open source</td>
+        <td>Subtitle timing and syncing. Powerful and mature. Can run Whisper, but you
+        choose engines, download models and point it at binaries yourself.</td>
+      </tr>
+      <tr>
+        <td>Whisper dictation tools</td><td>Free to ~$29</td>
+        <td>Live dictation — speaking and having text appear as you talk. A different
+        job from transcribing recordings you already have.</td>
+      </tr>
+      <tr>
+        <td>Cloud services</td><td>Per minute or monthly</td>
+        <td>Rev, Otter, Sonix, Descript. Fast and collaborative — but they work by
+        uploading your recording to their servers.</td>
+      </tr>
+      <tr>
+        <td>Airgap <em>(in development)</em></td><td>One-time</td>
+        <td>Batch transcription of existing recordings, offline, with professional
+        export formats. Built for people who can't upload.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Honestly: which should you use?</h2>
+
+  <p>
+    <strong>If you subtitle video</strong>, use Subtitle Edit. It's free, it's excellent at
+    timing and syncing, and it does that job better than anything I'm going to build. I'd
+    rather tell you that than pretend otherwise.
+  </p>
+
+  <p>
+    <strong>If you want to talk and see text appear</strong>, you want a dictation tool.
+    Several are free and good.
+  </p>
+
+  <p>
+    <strong>If you have recordings you cannot upload</strong> — client interviews, patient
+    sessions, research data, confidential source material — and you need clean transcripts
+    in Word or CSV rather than subtitle files, that's the gap Airgap is being built for.
+  </p>
+
+  <div class="claim">
+    <p>
+      The distinction that matters: Subtitle Edit is built for a <strong>subtitler</strong>.
+      Airgap is built for a <strong>professional with confidential audio</strong> who doesn't
+      care about video at all, and shouldn't have to learn about model files to get a
+      transcript.
+    </p>
+  </div>
+
+  <div class="signup" id="notify">
+    <h2>Tell me when it's ready</h2>
+    <p>One email when it ships. No list, no marketing.</p>
+    <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required
+             aria-label="Your email address">
+      <input type="hidden" name="_subject" value="Airgap — notify me (MacWhisper page)">
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="note">Used for this one announcement and nothing else.</p>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Airgap Transcribe — in development, 2026.</p>
+    <p><a href="./">Home</a> · <a href="transcribe-without-uploading.html">Transcribe without uploading</a> · <a href="hipaa-gdpr-compliant-transcription.html">HIPAA &amp; GDPR</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

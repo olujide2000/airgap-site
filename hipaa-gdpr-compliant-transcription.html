@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HIPAA and GDPR compliant transcription: what local processing does and doesn't solve</title>
+<meta name="description" content="Local transcription removes the third-party processor from your workflow. Here is what that changes under HIPAA and GDPR, and what it does not change.">
+<style>
+/* Airgap Transcribe - demand test site
+   No frameworks, no trackers, no external requests. Loads instantly anywhere. */
+
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --border: #e3e0da;
+  --ink: #1c1a17;
+  --ink-soft: #55504a;
+  --ink-faint: #86807a;
+  --accent: #1f5f4b;
+  --accent-soft: #eaf2ef;
+  --warn-bg: #fdf6e6;
+  --warn-border: #e8d9b0;
+  --max: 44rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161a;
+    --surface: #1b1e23;
+    --border: #2e333a;
+    --ink: #eceae7;
+    --ink-soft: #b3aea7;
+    --ink-faint: #857f78;
+    --accent: #5fc0a0;
+    --accent-soft: #16241f;
+    --warn-bg: #241f14;
+    --warn-border: #4a3f26;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  border-bottom: 1px solid var(--border);
+  padding: 1.1rem 0;
+  margin-bottom: 3rem;
+}
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.logo {
+  font-weight: 650; letter-spacing: -0.01em; color: var(--ink);
+  text-decoration: none; font-size: 1.05rem;
+}
+.logo span { color: var(--accent); }
+header.site nav a {
+  color: var(--ink-soft); text-decoration: none; font-size: 0.9rem; margin-left: 1.1rem;
+}
+header.site nav a:hover { color: var(--accent); }
+
+h1 {
+  font-size: clamp(1.9rem, 5vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+  font-weight: 680;
+}
+h2 {
+  font-size: 1.3rem; letter-spacing: -0.015em; margin: 2.8rem 0 0.9rem; font-weight: 640;
+}
+h3 { font-size: 1.02rem; margin: 1.8rem 0 0.5rem; font-weight: 640; }
+
+.lede { font-size: 1.16rem; color: var(--ink-soft); margin: 0 0 2rem; }
+
+p { margin: 0 0 1.1rem; }
+a { color: var(--accent); }
+strong { font-weight: 640; }
+
+/* the one idea the page has to land */
+.claim {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 1.1rem 1.3rem;
+  margin: 2rem 0;
+  border-radius: 0 6px 6px 0;
+}
+.claim p { margin: 0; font-size: 1.05rem; }
+
+ul.plain { padding-left: 1.15rem; margin: 0 0 1.4rem; }
+ul.plain li { margin-bottom: 0.55rem; }
+
+.who { display: grid; gap: 0.85rem; margin: 1.5rem 0 2rem; }
+.who div {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 8px; padding: 0.9rem 1.1rem;
+}
+.who b { display: block; margin-bottom: 0.15rem; }
+.who span { color: var(--ink-soft); font-size: 0.94rem; }
+
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0 2rem; font-size: 0.94rem; }
+th, td { text-align: left; padding: 0.6rem 0.7rem; border-bottom: 1px solid var(--border); }
+th { font-weight: 640; color: var(--ink-soft); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.04em; }
+td:first-child { font-weight: 560; }
+.tablescroll { overflow-x: auto; }
+
+/* signup */
+.signup {
+  border: 1px solid var(--border); background: var(--surface);
+  border-radius: 10px; padding: 1.6rem; margin: 2.5rem 0;
+}
+.signup h2 { margin-top: 0; }
+.signup form { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+.signup input[type=email] {
+  flex: 1 1 15rem; padding: 0.72rem 0.85rem; font-size: 1rem;
+  border: 1px solid var(--border); border-radius: 7px;
+  background: var(--bg); color: var(--ink);
+}
+.signup input[type=email]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.signup button {
+  padding: 0.72rem 1.3rem; font-size: 1rem; font-weight: 600;
+  background: var(--accent); color: #fff; border: 0; border-radius: 7px; cursor: pointer;
+}
+.signup button:hover { filter: brightness(1.08); }
+.signup .note { font-size: 0.86rem; color: var(--ink-faint); margin: 0.9rem 0 0; }
+
+.status {
+  background: var(--warn-bg); border: 1px solid var(--warn-border);
+  border-radius: 8px; padding: 0.85rem 1.1rem; margin: 0 0 2rem;
+  font-size: 0.93rem; color: var(--ink-soft);
+}
+
+footer.site {
+  margin-top: 4rem; border-top: 1px solid var(--border);
+  padding: 1.5rem 0 3rem; font-size: 0.88rem; color: var(--ink-faint);
+}
+footer.site a { color: var(--ink-soft); }
+
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="./">Airgap<span>.</span></a>
+    <nav>
+      <a href="transcribe-without-uploading.html">Offline</a>
+      <a href="macwhisper-for-windows.html">For Windows</a>
+      <a href="./">Home</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <h1>Transcription, HIPAA and GDPR</h1>
+
+  <p class="lede">
+    Local processing genuinely changes your compliance position — but not in the way most
+    marketing pages imply. Here's an honest account of what it does and doesn't do.
+  </p>
+
+  <div class="status">
+    <strong>This is not legal advice.</strong> I'm a software developer, not a lawyer or a
+    data protection officer. Use this to have a better-informed conversation with yours.
+  </div>
+
+  <h2>What changes when processing is local</h2>
+
+  <p>
+    Both HIPAA and GDPR are largely concerned with what happens when data moves to
+    <em>someone else</em>. Send a recording to a cloud transcription service and you've
+    engaged a third party to process protected data on your behalf. That brings obligations:
+  </p>
+
+  <ul class="plain">
+    <li><strong>Under HIPAA</strong>, that vendor is typically a Business Associate, and you
+      generally need a signed Business Associate Agreement before sending them any
+      protected health information. Many consumer transcription services will not sign one,
+      or only on their most expensive tier.</li>
+    <li><strong>Under GDPR</strong>, that vendor is a processor. You need a lawful basis, a
+      data processing agreement under Article 28, a record of the processing, and — if
+      they're outside your jurisdiction — a valid transfer mechanism.</li>
+    <li><strong>Under research ethics rules</strong>, your approval may simply not permit
+      third-party processing at all, regardless of what agreements exist.</li>
+  </ul>
+
+  <p>
+    When the transcription happens entirely on a machine you already control, using software
+    that makes no network connection, <strong>no third party is processing anything</strong>.
+    The data stays inside a boundary you've already accounted for. That doesn't make the
+    obligations disappear — it removes an entire category of them from the picture.
+  </p>
+
+  <div class="claim">
+    <p>
+      The honest framing: local processing doesn't make you compliant. It removes one of
+      the harder things to be compliant <em>about</em>. Your recordings are still protected
+      data, and everything you already do to safeguard them still applies.
+    </p>
+  </div>
+
+  <h2>What doesn't change</h2>
+
+  <p>
+    This is the part worth being clear about, because a tool that oversells here is a tool
+    that gets you in trouble:
+  </p>
+
+  <ul class="plain">
+    <li><strong>The recording is still protected data.</strong> Sitting on your laptop, it
+      carries the same obligations it always did.</li>
+    <li><strong>Your device security is still your responsibility</strong> — disk
+      encryption, access control, backups, and what happens if the laptop is lost or stolen.</li>
+    <li><strong>Retention and deletion rules still apply.</strong> Local storage makes it
+      easier to forget you still hold something you should have destroyed.</li>
+    <li><strong>Consent and lawful basis are unaffected.</strong> Whatever you needed to
+      record the conversation, you still need.</li>
+    <li><strong>Your own organisation's policy may still require review</strong> of any new
+      software touching sensitive data, local or not.</li>
+  </ul>
+
+  <h2>Questions worth asking of any transcription tool</h2>
+
+  <p>Including this one. If a vendor can't answer these plainly, that's informative:</p>
+
+  <ul class="plain">
+    <li>Does the audio leave the device at any point — including for licence checks,
+      crash reports, or analytics?</li>
+    <li>Does it work with the network disconnected? Can I verify that myself?</li>
+    <li>Is an account or sign-in required to use it?</li>
+    <li>Where are transcripts and temporary files written, and are they cleaned up?</li>
+    <li>If a cloud service: will you sign a BAA or an Article 28 DPA, at my price tier?</li>
+  </ul>
+
+  <h2>Where Airgap sits</h2>
+
+  <p>
+    Airgap is being built so the answers are: <strong>no, the audio never leaves the
+    device</strong>; <strong>yes, it works disconnected</strong>; <strong>no account
+    required</strong>; and no licence check that phones home, because a privacy tool that
+    calls a server to validate itself isn't really one.
+  </p>
+
+  <p>
+    What it won't claim is that installing it makes you HIPAA or GDPR compliant. No software
+    does that. It removes the third-party processor from your transcription workflow, which
+    is a real and useful thing, and leaves the rest of your obligations exactly where they
+    were.
+  </p>
+
+  <div class="signup" id="notify">
+    <h2>Tell me when it's ready</h2>
+    <p>One email when it ships. If you have a specific compliance requirement, reply and
+      tell me — I'd rather build for a real constraint than a guessed one.</p>
+    <form action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required
+             aria-label="Your email address">
+      <input type="hidden" name="_subject" value="Airgap — notify me (compliance page)">
+      <button type="submit">Notify me</button>
+    </form>
+    <p class="note">Used for this one announcement and nothing else.</p>
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <p>Airgap Transcribe — in development, 2026. Not legal advice.</p>
+    <p><a href="./">Home</a> · <a href="transcribe-without-uploading.html">Transcribe without uploading</a> · <a href="macwhisper-for-windows.html">A MacWhisper alternative for Windows</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
